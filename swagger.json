@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: Exchange Rate
+  version: 1.0.11
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+ /exchangerate:
+    post:
+     
+      requestBody:
+        description: it contains the configuration to be used to generate echange rate  from one currency to other.
+        content:
+          application/json:
+            schema:
+              type: object
+              required :
+               - amount
+               - from_currency
+               - to_currency 
+               - Date
+              properties:
+                amount :
+                  type : number
+                  default : 10
+                from_currency :
+                  type : string
+                  default : INR
+                to_currency :
+                  type : string
+                  default : USD
+                Date :
+                  type : number
+                  default : 2022
+              
+               
+      description: This endpoint convert one currency rate to other currency rate.
+          
+      responses:
+        '200':
+          description: it returns converted amount.
+          content:
+            application/json:
+              schema :
+                 type: object
+                 properties:
+                  result:
+                   type : number
+                   default : 0.12230171822011471
+                
+               
+        '400':
+          description: something goes wrong
+      
+          
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string 
+                    default : something went wrong
